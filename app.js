@@ -2,11 +2,13 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRouter from './routers/authRouter.js';
-import productRouter from './routers/productRouter.js';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
+
+import authRouter from './routers/authRouter.js';
+import productRouter from './routers/productRouter.js';
+import orderRouter from './routers/orderRouter.js';
 
 dotenv.config();
 
@@ -36,6 +38,7 @@ app.get('/', (req, res) => {
 /* Parent Router */
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/products', productRouter);
+app.use('/api/v1/order', orderRouter);
 
 app.use(notFound);
 app.use(errorHandler);
