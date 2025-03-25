@@ -5,6 +5,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import { notFound, errorHandler } from './middleware/errorHandler.js';
+import helmet from 'helmet';
+import ExpressMongoSanitize from 'express-mongo-sanitize';
 
 import authRouter from './routers/authRouter.js';
 import productRouter from './routers/productRouter.js';
@@ -25,6 +27,8 @@ const port = 3002;
 /* Middleware */
 app.use(cors());
 app.use(express.json());
+app.use(helmet());
+app.use(ExpressMongoSanitize());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 if (process.env.NODE_ENV === 'development') {
